@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class IngredientService {
 
+    @Autowired
     private IngredientRepository ingredientRepository;
 
     public Ingredient saveIngredient(Ingredient ingredient) {
@@ -32,7 +33,7 @@ public class IngredientService {
             existingIngredient.setDescription(newIngredient.getDescription());
             return ingredientRepository.save(existingIngredient);
         }
-        return null; // or throw an exception
+        return null;
     }
 }
 

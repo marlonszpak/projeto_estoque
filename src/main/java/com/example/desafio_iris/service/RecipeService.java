@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class RecipeService {
 
+    @Autowired
     private RecipeRepository recipeRepository;
 
     public Recipe saveRecipe(Recipe recipe) {
@@ -39,8 +40,4 @@ public class RecipeService {
         }
         return null; // or throw an exception
     }
-
-//    public List<Recipe> findRecipesWithAtLeastIngredients(int ingredientCount) {
-//        return recipeRepository.findRecipesWithAtLeastIngredients(ingredientCount);
-//    }
 }

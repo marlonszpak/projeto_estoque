@@ -12,28 +12,28 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/desafio")
+@RequestMapping("/desafio/recipes")
 public class RecipeController {
 
     @Autowired
     private RecipeService recipeService;
 
-    @PostMapping("/recipes")
+    @PostMapping
     public Recipe createRecipe(@RequestBody Recipe recipe) {
         return recipeService.saveRecipe(recipe);
     }
 
-    @GetMapping("/recipes")
+    @GetMapping
     public List<Recipe> getAllRecipes() {
         return recipeService.getAllRecipes();
     }
 
-    @GetMapping("/recipes/search")
+    @GetMapping("/search")
     public List<Recipe> findRecipesByIngredients(@RequestParam List<String> ingredients) {
         return recipeService.findRecipesByIngredients(ingredients);
     }
 
-    @PutMapping("/recipes/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Recipe> updateRecipe(
             @PathVariable Long id,
             @RequestBody Recipe recipeToUpdate) {
@@ -41,7 +41,7 @@ public class RecipeController {
         return updatedRecipe != null ? ResponseEntity.ok(updatedRecipe) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/recipes/{id}/ingredients")
+    @GetMapping("/{id}/ingredients")
     public ResponseEntity<List<Ingredient>> getIngredientsForRecipe(@PathVariable Long id) {
         Optional<Recipe> recipe = recipeService.findById(id);
         if (recipe.isPresent()) {
