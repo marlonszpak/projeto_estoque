@@ -51,13 +51,6 @@ public class RecipeController {
             return ResponseEntity.notFound().build();
         }
     }
-
-//    @GetMapping("/compatible")
-//    public List<Recipe> findCompatibleRecipes() {
-//        // Aqui definimos "quase compatíveis" como receitas que têm pelo menos 75% dos ingredientes
-//        int minIngredientCount = (int) Math.ceil(0.75 * 4); // 75% de 4 ingredientes
-//        return recipeService.findRecipesWithAtLeastIngredients(minIngredientCount);
-//    }
 }
 
 
