@@ -23,3 +23,4 @@ public class Recipe {
     private List<Ingredient> ingredients;
 
 }
+
