@@ -38,6 +38,6 @@ public class RecipeService {
             existingRecipe.setIngredients(newRecipe.getIngredients());
             return recipeRepository.save(existingRecipe);
         }
-        return null; // or throw an exception
+        return null;
     }
 }
