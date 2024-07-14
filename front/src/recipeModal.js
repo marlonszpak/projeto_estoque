@@ -12,7 +12,7 @@ const RecipeModal = ({ isOpen, onRequestClose, onRecipeSaved, currentRecipe }) =
   useEffect(() => {
     const fetchIngredients = async () => {
       try {
-        const response = await fetch('https://e706-187-59-43-112.ngrok-free.app/desafio/ingredients');
+        const response = await fetch('http://localhost:8080/desafio/ingredients');
         if (!response.ok) {
           throw new Error('Erro ao buscar ingredientes');
         }
@@ -73,7 +73,7 @@ const RecipeModal = ({ isOpen, onRequestClose, onRecipeSaved, currentRecipe }) =
     };
 
     try {
-      const response = await fetch(currentRecipe ? `https://e706-187-59-43-112.ngrok-free.app/desafio/recipes/${currentRecipe.id}` : 'https://e706-187-59-43-112.ngrok-free.app/desafio/recipes', {
+      const response = await fetch(currentRecipe ? `http://localhost:8080/desafio/recipes/${currentRecipe.id}` : 'http://localhost:8080/desafio/recipes', {
         method: currentRecipe ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
