@@ -11,7 +11,6 @@ import java.util.Optional;
 @Service
 public class IngredientService {
 
-    @Autowired
     private IngredientRepository ingredientRepository;
 
     public Ingredient saveIngredient(Ingredient ingredient) {

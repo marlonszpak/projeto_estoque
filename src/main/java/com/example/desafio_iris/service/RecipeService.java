@@ -11,7 +11,6 @@ import java.util.Optional;
 @Service
 public class RecipeService {
 
-    @Autowired
     private RecipeRepository recipeRepository;
 
     public Recipe saveRecipe(Recipe recipe) {
