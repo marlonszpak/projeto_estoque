@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     const fetchIngredientes = async () => {
       try {
-        const response = await fetch('http://localhost:8080/desafio/ingredients');
+        const response = await fetch('https://e706-187-59-43-112.ngrok-free.app/desafio/ingredients');
         if (!response.ok) {
           throw new Error('Erro ao buscar ingredientes');
         }
@@ -31,7 +31,7 @@ const App = () => {
   useEffect(() => {
     const fetchReceitas = async () => {
       try {
-        const response = await fetch('http://localhost:8080/desafio/recipes');
+        const response = await fetch('https://e706-187-59-43-112.ngrok-free.app/desafio/recipes');
         if (!response.ok) {
           throw new Error('Erro ao buscar receitas');
         }

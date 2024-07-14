@@ -19,7 +19,7 @@ const IngredienteModal = ({ isOpen, onRequestClose, onIngredientAdded }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/desafio/ingredients', {
+      const response = await fetch('https://e706-187-59-43-112.ngrok-free.app/desafio/ingredients', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,6 +29,8 @@ const IngredienteModal = ({ isOpen, onRequestClose, onIngredientAdded }) => {
 
       if (!response.ok) {
         throw new Error('Erro ao cadastrar ingrediente');
+      }else{
+        window.location.reload()
       }
 
       const data = await response.json();
