@@ -22,18 +22,23 @@ public class IngredientService {
         return ingredientRepository.findAll();
     }
 
-    public Optional<Ingredient> getIngredientByDescription(String description) {
-        return ingredientRepository.findByDescription(description);
-    }
-
     public Ingredient update(Long id, Ingredient newIngredient) {
         Optional<Ingredient> optionalIngredient = ingredientRepository.findById(id);
         if (optionalIngredient.isPresent()) {
             Ingredient existingIngredient = optionalIngredient.get();
             existingIngredient.setDescription(newIngredient.getDescription());
             return ingredientRepository.save(existingIngredient);
+        } else {
+            throw new RuntimeException("Ingrediente não encontrado com id: " + id);
         }
-        return null;
+    }
+
+    public void deleteIngredient(Long id) {
+        if (ingredientRepository.existsById(id)) {
+            ingredientRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Ingrediente não encontrado com id: " + id);
+        }
     }
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import IngredientModal from './IngredienteModal';
-import RecipeModal from './recipeModal';
+import IngredienteModal from './IngredienteModal';
+import RecipeModal from './RecipeModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
@@ -10,6 +10,7 @@ const App = () => {
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
   const [currentRecipe, setCurrentRecipe] = useState(null);
   const [selectedIngredients, setSelectedIngredients] = useState({});
+  const [editIngredient, setEditIngredient] = useState(null);
 
   useEffect(() => {
     const fetchIngredientes = async () => {
@@ -55,6 +56,7 @@ const App = () => {
 
   const handleCloseIngredientModal = () => {
     setIsIngredientModalOpen(false);
+    setEditIngredient(null);
   };
 
   const handleOpenRecipeModal = (recipe = null) => {
@@ -82,6 +84,12 @@ const App = () => {
     }));
   };
 
+  const handleEditIngredient = (ingredient) => {
+    setEditIngredient(ingredient);
+    setIsIngredientModalOpen(true);
+  };
+
+  
   const isRecipeComplete = (recipe) => {
     return recipe.ingredients.every(ingredient => selectedIngredients[ingredient.id]);
   };
@@ -102,17 +110,22 @@ const App = () => {
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h2>Lista de Ingredientes</h2>
             <button className="btn btn-primary" onClick={handleOpenIngredientModal}>Cadastrar Ingrediente</button>
-        </div>
+          </div>
           <ul className="list-group">
             {ingredientes.map((ingrediente) => (
-              <li className="list-group-item" key={ingrediente.id}>
-                <input
-                  type="checkbox"
-                  checked={selectedIngredients[ingrediente.id] || false}
-                  onChange={() => handleIngredientToggle(ingrediente.id)}
-                />
-                {' '}
-                {ingrediente.description}
+              <li className="list-group-item d-flex justify-content-between align-items-center" key={ingrediente.id}>
+                <div>
+                  <input
+                    type="checkbox"
+                    checked={selectedIngredients[ingrediente.id] || false}
+                    onChange={() => handleIngredientToggle(ingrediente.id)}
+                  />
+                  {' '}
+                  {ingrediente.description}
+                </div>
+                <div>
+                  <button className="btn btn-secondary mx-2" onClick={() => handleEditIngredient(ingrediente)}>Editar</button>
+                </div>
               </li>
             ))}
           </ul>
@@ -125,8 +138,8 @@ const App = () => {
           <ul className="list-group">
             {receitas.map((receita) => (
               <li
-              className={`list-group-item d-flex justify-content-between align-items-center ${isRecipeComplete(receita) ? 'bg-success text-white' : isRecipeAlmostComplete(receita) ? 'bg-warning' : ''}`}
-              key={receita.id}
+                className={`list-group-item d-flex justify-content-between align-items-center ${isRecipeComplete(receita) ? 'bg-success text-white' : isRecipeAlmostComplete(receita) ? 'bg-warning' : ''}`}
+                key={receita.id}
               >
                 {receita.description}
                 <button className="btn btn-secondary" onClick={() => handleOpenRecipeModal(receita)}>Editar</button>
@@ -135,10 +148,11 @@ const App = () => {
           </ul>
         </div>
       </div>
-      <IngredientModal
+      <IngredienteModal
         isOpen={isIngredientModalOpen}
         onRequestClose={handleCloseIngredientModal}
         onIngredientAdded={adicionarIngrediente}
+        ingredientToEdit={editIngredient}
       />
       <RecipeModal
         isOpen={isRecipeModalOpen}

@@ -26,10 +26,6 @@ public class RecipeService {
         return recipeRepository.findById(id);
     }
 
-    public List<Recipe> findRecipesByIngredients(List<String> ingredientDescriptions) {
-        return recipeRepository.findByIngredientsDescriptionIn(ingredientDescriptions);
-    }
-
     public Recipe update(Long id, Recipe newRecipe) {
         Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
         if (optionalRecipe.isPresent()) {
@@ -37,7 +33,8 @@ public class RecipeService {
             existingRecipe.setDescription(newRecipe.getDescription());
             existingRecipe.setIngredients(newRecipe.getIngredients());
             return recipeRepository.save(existingRecipe);
+        } else {
+            throw new RuntimeException("Receita não encontrada com id: " + id);
         }
-        return null;
     }
 }

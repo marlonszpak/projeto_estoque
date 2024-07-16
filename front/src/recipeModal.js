@@ -57,13 +57,15 @@ const RecipeModal = ({ isOpen, onRequestClose, onRecipeSaved, currentRecipe }) =
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!description || /\d/.test(description)) {
-      setError('Descrição inválida. Não pode ser vazia ou conter números.');
+    const invalidCharacters = /[^a-zA-ZÀ-ÖØ-öø-ÿ\s]/;
+
+    if (!description || /\d/.test(description) || invalidCharacters.test(description)) {
+      setError('Descrição inválida. Não pode ser vazia, conter números ou caracteres especiais.');
       return;
     }
 
     if (selectedIngredients.length < 2) {
-      setError('Selecione pelo menos dois ingredientes.');
+      setError('Selecione pelo menos dois ingredientes para sua receita.');
       return;
     }
 

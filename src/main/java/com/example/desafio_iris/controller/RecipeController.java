@@ -28,11 +28,6 @@ public class RecipeController {
         return recipeService.getAllRecipes();
     }
 
-    @GetMapping("/search")
-    public List<Recipe> findRecipesByIngredients(@RequestParam List<String> ingredients) {
-        return recipeService.findRecipesByIngredients(ingredients);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<Recipe> updateRecipe(
             @PathVariable Long id,
@@ -41,16 +36,6 @@ public class RecipeController {
         return updatedRecipe != null ? ResponseEntity.ok(updatedRecipe) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/{id}/ingredients")
-    public ResponseEntity<List<Ingredient>> getIngredientsForRecipe(@PathVariable Long id) {
-        Optional<Recipe> recipe = recipeService.findById(id);
-        if (recipe.isPresent()) {
-            List<Ingredient> ingredients = recipe.get().getIngredients();
-            return ResponseEntity.ok(ingredients);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }
 
 

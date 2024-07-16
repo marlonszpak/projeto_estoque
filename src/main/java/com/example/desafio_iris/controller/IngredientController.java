@@ -26,16 +26,20 @@ public class IngredientController {
         return ingredientService.getAllIngredients();
     }
 
-    @GetMapping("/{description}")
-    public ResponseEntity<Ingredient> getIngredientByDescription(@PathVariable String description) {
-        Optional<Ingredient> ingredient = ingredientService.getIngredientByDescription(description);
-        return ingredient.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<Ingredient> updateIngredient(@PathVariable Long id, @RequestBody Ingredient ingredientToUpdate){
         Ingredient updatedIngredient = ingredientService.update(id, ingredientToUpdate);
         return updatedIngredient != null ? ResponseEntity.ok(updatedIngredient) : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteIngredient(@PathVariable Long id) {
+        try {
+            ingredientService.deleteIngredient(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
 
