@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import IngredienteModal from './IngredienteModal';
-import RecipeModal from './RecipeModal';
+import RecipeModal from './recipeModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
