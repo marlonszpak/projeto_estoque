@@ -1,4 +1,4 @@
-package com.example.desafio_iris.configs;
+package com.example.projeto_estoque.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

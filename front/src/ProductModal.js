@@ -34,7 +34,7 @@ const IngredienteModal = ({ isOpen, onRequestClose, onIngredientAdded, ingredien
     try {
       let response;
       if (isEditing) {
-        response = await fetch(`http://localhost:8080/desafio/ingredients/${ingredientToEdit.id}`, {
+        response = await fetch(`http://localhost:8080/product/${ingredientToEdit.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const IngredienteModal = ({ isOpen, onRequestClose, onIngredientAdded, ingredien
         });
         window.location.reload();
       } else {
-        response = await fetch('http://localhost:8080/desafio/ingredients', {
+        response = await fetch('http://localhost:8080/product', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
