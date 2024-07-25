@@ -27,6 +27,8 @@ public class ProductService {
         if (optionalProduct.isPresent()) {
             Product existingProduct = optionalProduct.get();
             existingProduct.setName(newProduct.getName());
+            existingProduct.setAmount(newProduct.getAmount());
+            existingProduct.setReference(newProduct.getReference());
             return productRepository.save(existingProduct);
         } else {
             throw new RuntimeException("Produto não encontrado com id: " + id);
